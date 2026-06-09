@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificado Verificado - Jorge Alfaro</title>
+    <link rel="stylesheet" href="css/nav.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .verified {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .cert-id {
+            background: #e8f4f8;
+            border-left: 4px solid #2a5298;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+        
+        .cert-id strong {
+            color: #1e3c72;
+            font-size: 13px;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .cert-id code {
+            color: #2a5298;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: monospace;
+        }
+        
+        .certificate-preview {
+            margin: 30px 0;
+            border: 3px solid #e8f4f8;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .certificate-preview img {
+            width: 100%;
+            display: block;
+        }
+        
+        .info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .info-box {
+            background: #f8fafb;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 3px solid #2a5298;
+        }
+        
+        .info-box label {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #6b7c93;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .info-box p {
+            margin-top: 8px;
+            color: #1e3c72;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        .actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 15px;
+        }
+        
+        .btn-primary {
+            background: #2a5298;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #1e3c72;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #0077b5;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #006396;
+        }
+        
+        .footer {
+            background: #f8fafb;
+            padding: 20px;
+            text-align: center;
+            color: #6b7c93;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+<!-- ===== NAVEGACIÓN MODERNA MEJORADA - ClasesMat ===== -->
+<nav class="navbar" role="navigation" aria-label="Navegación principal">
+  <div class="container">
+    <div class="nav-container">
+      <!-- Logo mejorado -->
+      <a href="#inicio" class="logo" aria-label="ClasesMat - Inicio">
+        <span class="logo-text">ClasesMat</span>
+        
+      </a>
+
+      <!-- Menú principal -->
+      <ul class="nav-menu" id="navMenu" role="menubar" aria-hidden="false">
+        <li role="none">
+          <a href="#inicio" class="nav-link active" role="menuitem" aria-current="page">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-text">Inicio</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="servicios.html" class="nav-link" role="menuitem">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-text">Servicios</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="portafolio.html" class="nav-link" role="menuitem">
+            <span class="nav-icon">💼</span>
+            <span class="nav-text">Portafolio</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="cursos.html" class="nav-link" role="menuitem">
+            <span class="nav-icon">📚</span>
+            <span class="nav-text">Cursos</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="blog.html" class="nav-link" role="menuitem">
+            <span class="nav-icon">📝</span>
+            <span class="nav-text">Blog</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="contacto.html" class="nav-link" role="menuitem">
+            <span class="nav-icon">📞</span>
+            <span class="nav-text">Contacto</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="logincertificados.html" class="nav-link" role="menuitem">
+            <span class="nav-icon">🎓</span>
+            <span class="nav-text">Certificados</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="https://wa.me/51968269924" 
+             class="btn-whatsapp" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             role="menuitem"
+             aria-label="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            <span class="btn-text">WhatsApp</span>
+            <span class="btn-pulse"></span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Botón menú móvil mejorado -->
+      <button class="mobile-menu-btn" 
+              id="mobileMenuBtn"
+              type="button"
+              aria-controls="navMenu"
+              aria-expanded="false"
+              aria-label="Abrir menú de navegación">
+        <span class="hamburger">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Indicador de progreso de scroll -->
+  <div class="scroll-progress" aria-hidden="true"></div>
+  
+  <!-- Overlay para menú móvil -->
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+</nav>
+
+<!-- Indicadores de navegación lateral (opcional) -->
+<aside class="nav-indicators" aria-label="Indicadores de sección">
+  <div class="indicator" data-target="#inicio" aria-label="Ir a Inicio"></div>
+  <div class="indicator" data-target="#servicios" aria-label="Ir a Servicios"></div>
+  <div class="indicator" data-target="#portafolio" aria-label="Ir a Portafolio"></div>
+  <div class="indicator" data-target="#cursos" aria-label="Ir a Cursos"></div>
+  <div class="indicator" data-target="#blog" aria-label="Ir a Blog"></div>
+  <div class="indicator" data-target="#contacto" aria-label="Ir a Contacto"></div>
+  <div class="indicator" data-target="#logincertificados" aria-label="Ir a Certificados"></a>
+</aside>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 ClasesMat.com</h1>
+            <div class="verified">
+                ✓ Certificado Verificado
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="cert-id">
+                <strong>ID DE CERTIFICADO</strong>
+                <code>CM-ADPCE-2025-001-JA</code>
+            </div>
+            
+            <div class="certificate-preview">
+                <img src="jorgealfaro.png" alt="Certificado de Jorge Alfaro">
+            </div>
+            
+            <div class="info">
+                <div class="info-box">
+                    <label>Participante</label>
+                    <p>Jorge Alfaro</p>
+                </div>
+                
+                <div class="info-box">
+                    <label>Curso</label>
+                    <p>Análisis de Datos Predictivos</p>
+                </div>
+                
+                <div class="info-box">
+                    <label>Duración</label>
+                    <p>6 Semanas</p>
+                </div>
+                
+                <div class="info-box">
+                    <label>Instructor</label>
+                    <p>Alex Sandro Cayllahua</p>
+                </div>
+            </div>
+            
+            <div class="actions">
+                <a href="jorgealfaro2.pdf" download class="btn btn-primary">
+                    📄 Descargar PDF
+                </a>
+                
+                <a href="https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=Análisis de Datos Predictivos para Camiones Eléctricos con Python&organizationId=ClasesMat.com&issueYear=2025&issueMonth=10&certId=CM-ADPCE-2025-001-JA" target="_blank" class="btn btn-secondary">
+                    💼 Añadir a LinkedIn
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>ClasesMat.com</strong> | Certificación Profesional Verificada</p>
+        </div>
+    </div>
+</body>
+</html>

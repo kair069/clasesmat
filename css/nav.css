@@ -1,0 +1,573 @@
+/* ===== NAVEGACIÓN MODERNA - AyudaMat ===== */
+
+/* Variables específicas para navegación */
+:root {
+  --nav-height: 80px;
+  --nav-bg: rgba(15, 23, 42, 0.95);
+  --nav-bg-scrolled: rgba(15, 23, 42, 0.98);
+  --nav-border: rgba(14, 165, 233, 0.2);
+  --nav-shadow: 0 8px 32px rgba(30, 58, 138, 0.3);
+  --nav-backdrop: blur(20px);
+  --nav-transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Navegación principal */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  background: var(--nav-bg);
+  backdrop-filter: var(--nav-backdrop);
+  -webkit-backdrop-filter: var(--nav-backdrop);
+  border-bottom: 1px solid var(--nav-border);
+  z-index: 1002; /* ✅ CORREGIDO: Mayor que promo-bar (1001) */
+  transition: var(--nav-transition);
+  transform: translateY(0);
+}
+
+/* Estado cuando se hace scroll */
+.navbar.scrolled {
+  background: var(--nav-bg-scrolled);
+  box-shadow: var(--nav-shadow);
+  border-bottom-color: rgba(14, 165, 233, 0.3);
+}
+
+/* Estado oculto cuando se hace scroll hacia abajo */
+.navbar.hidden {
+  transform: translateY(-100%);
+}
+
+/* Contenedor de navegación */
+.nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Logo mejorado */
+.logo {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  text-decoration: none;
+  background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #0891b2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  transition: var(--nav-transition);
+  letter-spacing: -0.5px;
+  z-index: 1003; /* ✅ CORREGIDO: Asegurar visibilidad del logo */
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #0ea5e9, #06b6d4);
+  transition: width 0.3s ease;
+}
+
+.logo:hover::after {
+  width: 100%;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+  filter: brightness(1.2);
+}
+
+/* Menú principal */
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-menu li {
+  position: relative;
+}
+
+/* Enlaces de navegación */
+.nav-link {
+  display: block;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 12px;
+  transition: var(--nav-transition);
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 0.3px;
+}
+
+/* Efecto de fondo en hover */
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 12px;
+}
+
+/* Efecto de brillo */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.nav-link:hover::before {
+  opacity: 1;
+}
+
+.nav-link:hover::after {
+  left: 100%;
+}
+
+.nav-link:hover {
+  color: #06b6d4;
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+}
+
+/* Enlace activo */
+.nav-link.active {
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.2) 0%, rgba(6, 182, 212, 0.2) 100%);
+  color: #06b6d4;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+}
+
+/* Botón WhatsApp mejorado */
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+  transition: var(--nav-transition);
+  position: relative;
+  overflow: hidden;
+  margin-left: 1rem;
+}
+
+.btn-whatsapp::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-whatsapp:hover::before {
+  left: 100%;
+}
+
+.btn-whatsapp:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6);
+}
+
+.btn-whatsapp i {
+  font-size: 1.1rem;
+  animation: pulse-whatsapp 2s infinite;
+}
+
+@keyframes pulse-whatsapp {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+/* Botón menú móvil */
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: var(--nav-transition);
+  position: relative;
+  z-index: 1003; /* ✅ CORREGIDO: Asegurar visibilidad */
+}
+
+.mobile-menu-btn:hover {
+  background: rgba(14, 165, 233, 0.2);
+  transform: scale(1.1);
+}
+
+/* ✅ CORREGIDO: Estilos para el icono hamburguesa animado */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  width: 20px;
+  height: 16px;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 2px;
+  background-color: #ffffff;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+/* Animación del menú hamburguesa */
+.mobile-menu-btn.active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-btn.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-btn.active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Fallback para iconos Font Awesome */
+.mobile-menu-btn .fas {
+  transition: transform 0.3s ease;
+}
+
+.mobile-menu-btn.active .fa-bars {
+  transform: rotate(90deg);
+}
+
+/* Overlay para menú móvil */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  z-index: 1001; /* ✅ CORREGIDO: Entre navbar y menú */
+}
+
+.nav-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .nav-container {
+    padding: 0 1.5rem;
+  }
+  
+  .nav-menu {
+    gap: 0.25rem;
+  }
+  
+  .nav-link {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .btn-whatsapp {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.85rem;
+  }
+}
+
+/* ✅ CORREGIDO: Móvil - Navegación funcional */
+@media (max-width: 768px) {
+  :root {
+    --nav-height: 70px;
+  }
+  
+  .navbar {
+    z-index: 1002; /* ✅ Mantener por encima de todo */
+  }
+  
+  .nav-container {
+    padding: 0 1rem;
+    position: relative; /* ✅ CORREGIDO: Contexto de posicionamiento */
+  }
+  
+  .logo {
+    font-size: 1.5rem;
+    z-index: 1003; /* ✅ Logo siempre visible */
+  }
+  
+  .mobile-menu-btn {
+    display: block;
+    z-index: 1003; /* ✅ Botón siempre visible */
+  }
+  
+  .nav-menu {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    height: calc(100vh - var(--nav-height));
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.98) 100%);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px); /* ✅ Safari support */
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 0;
+    padding: 2rem 1rem;
+    transform: translateX(-100%); /* ✅ Oculto por defecto */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    z-index: 1002; /* ✅ CORREGIDO: Por encima del overlay */
+    
+    /* ✅ CORREGIDO: Fallbacks para mejor compatibilidad */
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+  }
+  
+  .nav-menu.active {
+    transform: translateX(0); /* ✅ Visible cuando activo */
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+  }
+  
+  .nav-menu li {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .nav-link {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    border: 1px solid rgba(14, 165, 233, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    text-align: center;
+    margin-bottom: 0.5rem;
+    display: block; /* ✅ CORREGIDO: Asegurar display */
+    opacity: 1; /* ✅ CORREGIDO: Asegurar opacidad */
+  }
+  
+  .nav-link:hover {
+    background: rgba(14, 165, 233, 0.2);
+    border-color: rgba(14, 165, 233, 0.4);
+    transform: translateY(0) scale(1.02);
+  }
+  
+  .btn-whatsapp {
+    width: 100%;
+    justify-content: center;
+    padding: 1.25rem;
+    font-size: 1.1rem;
+    margin: 1rem 0 0 0;
+    border-radius: 15px;
+  }
+}
+
+/* Móvil pequeño */
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 0 0.75rem;
+  }
+  
+  .logo {
+    font-size: 1.35rem;
+  }
+  
+  .nav-menu {
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .nav-link {
+    padding: 0.875rem 1.25rem;
+    font-size: 1rem;
+  }
+}
+
+/* ✅ CORREGIDO: Navegación lateral alternativa (fallback) */
+@media (max-width: 768px) {
+  /* Indicadores de navegación lateral (opcional) */
+  .nav-indicators {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(14, 165, 233, 0.5);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .indicator.active {
+    background: #06b6d4;
+    transform: scale(1.5);
+  }
+}
+
+/* Animaciones de entrada */
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Aplicar animaciones al cargar */
+.navbar {
+  animation: slideInFromTop 0.6s ease-out;
+}
+
+.nav-menu.active .nav-link {
+  animation: fadeInScale 0.4s ease-out forwards;
+}
+
+.nav-menu.active .nav-link:nth-child(1) { animation-delay: 0.1s; }
+.nav-menu.active .nav-link:nth-child(2) { animation-delay: 0.15s; }
+.nav-menu.active .nav-link:nth-child(3) { animation-delay: 0.2s; }
+.nav-menu.active .nav-link:nth-child(4) { animation-delay: 0.25s; }
+.nav-menu.active .nav-link:nth-child(5) { animation-delay: 0.3s; }
+.nav-menu.active .nav-link:nth-child(6) { animation-delay: 0.35s; }
+.nav-menu.active .nav-link:nth-child(7) { animation-delay: 0.4s; }
+
+/* Indicador de página activa mejorado */
+.nav-link.active::before {
+  opacity: 1;
+  background: linear-gradient(135deg, rgba(14, 165, 233, 0.3) 0%, rgba(6, 182, 212, 0.3) 100%);
+}
+
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #06b6d4;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.8);
+}
+
+/* Efecto de partículas en hover del logo */
+.logo:hover {
+  position: relative;
+}
+
+.logo:hover::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.3) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: pulse-glow 1.5s infinite;
+}
+
+@keyframes pulse-glow {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0.7; }
+}
+
+/* ✅ CORREGIDO: Asegurar visibilidad en todos los dispositivos */
+@media screen and (max-width: 768px) {
+  .navbar {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  .nav-container {
+    display: flex !important;
+  }
+  
+  .logo,
+  .mobile-menu-btn {
+    display: block !important;
+    visibility: visible !important;
+  }
+}
+
+/* ✅ DEBUGGING: Estilos temporales para identificar problemas */
+/*
+.navbar {
+  border: 2px solid red !important;
+}
+
+.nav-container {
+  border: 2px solid blue !important;
+}
+
+.mobile-menu-btn {
+  border: 2px solid green !important;
+}
+*/

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://clasesmat.com/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://clasesmat.com/cursos.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://clasesmat.com/servicios.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clasesmat.com/blog.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://clasesmat.com/portafolio.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clasesmat.com/contacto.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+
+  <url>
+  <loc>https://clasesmat.com/curso-camiones-electricos.html</loc>
+  <lastmod>2025-01-20</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.9</priority>
+  <image:image>
+    <image:loc>https://clasesmat.com/img/curso-camiones-electricos-preview.jpg</image:loc>
+    <image:caption>Curso Python para análisis de datos en camiones eléctricos - ClasesMat</image:caption>
+    <image:title>Análisis de Datos Predictivos Camiones Eléctricos</image:title>
+  </image:image>
+  <video:video>
+    <video:thumbnail_loc>https://clasesmat.com/img/curso-camiones-electricos-thumb.jpg</video:thumbnail_loc>
+    <video:title>Preview Curso Análisis Datos Camiones Eléctricos</video:title>
+    <video:description>Aprende Python aplicado al análisis de datos operacionales en camiones eléctricos</video:description>
+    <video:content_loc>https://clasesmat.com/curso-camiones-electricos-preview.mp4</video:content_loc>
+    <video:duration>60</video:duration>
+  </video:video>
+</url>
+</urlset>

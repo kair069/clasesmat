@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+Sitemap: https://clasesmat.com/sitemap.xml
+Host: https://clasesmat.com
+
+# Permitir indexación de multimedia del curso de camiones eléctricos
+Allow: /img/curso-camiones-electricos-*.jpg
+Allow: /video/curso-camiones-electricos-*.mp4
+Allow: /img/curso-camiones-electricos-*.webp
+Allow: /Diapositiva*.mp4
+Allow: /curso-camiones-electricos-preview.mp4
+
+# Permitir indexación del nuevo curso
+Allow: /curso-camiones-electricos-clasesmat.html
+Allow: /Curso_de_Análisis_de_Datos_Predictivos_para_Camiones_Eléctricos_ClasesMat.html

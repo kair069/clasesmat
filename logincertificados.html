@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acceso a Certificado - ClasesMat.com</title>
+    <link rel="stylesheet" href="css/nav.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .login-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            width: 100%;
+            max-width: 420px;
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 40px 30px;
+            text-align: center;
+            color: white;
+        }
+        
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .form-container {
+            padding: 40px 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e8f4f8;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+        
+        input:focus {
+            outline: none;
+            border-color: #2a5298;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+        }
+        
+        .btn-login {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+        
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(42, 82, 152, 0.3);
+        }
+        
+        .btn-login:active {
+            transform: translateY(0);
+        }
+        
+        .error {
+            background: #fee;
+            border-left: 4px solid #e53e3e;
+            padding: 12px 16px;
+            border-radius: 4px;
+            color: #c53030;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .info {
+            background: #e8f4f8;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 24px;
+            font-size: 13px;
+            color: #1e3c72;
+            text-align: center;
+        }
+        
+        .footer {
+            background: #f8fafb;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #6b7c93;
+        }
+
+
+        
+    </style>
+</head>
+<body>
+<!-- ===== NAVEGACIÓN MODERNA MEJORADA - ClasesMat ===== -->
+<nav class="navbar" role="navigation" aria-label="Navegación principal">
+  <div class="container">
+    <div class="nav-container">
+      <!-- Logo mejorado -->
+      <a href="#inicio" class="logo" aria-label="ClasesMat - Inicio">
+        <span class="logo-text">ClasesMat</span>
+        
+      </a>
+
+      <!-- Menú principal -->
+      <ul class="nav-menu" id="navMenu" role="menubar" aria-hidden="false">
+        <li role="none">
+          <a href="#inicio" class="nav-link active" role="menuitem" aria-current="page">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-text">Inicio</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="servicios.html" class="nav-link" role="menuitem">
+            <span class="nav-icon">⚙️</span>
+            <span class="nav-text">Servicios</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="portafolio.html" class="nav-link" role="menuitem">
+            <span class="nav-icon">💼</span>
+            <span class="nav-text">Portafolio</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="cursos.html" class="nav-link" role="menuitem">
+            <span class="nav-icon">📚</span>
+            <span class="nav-text">Cursos</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="blog.html" class="nav-link" role="menuitem">
+            <span class="nav-icon">📝</span>
+            <span class="nav-text">Blog</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="contacto.html" class="nav-link" role="menuitem">
+            <span class="nav-icon">📞</span>
+            <span class="nav-text">Contacto</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="logincertificados.html" class="nav-link" role="menuitem">
+            <span class="nav-icon">🎓</span>
+            <span class="nav-text">Certificados</span>
+          </a>
+        </li>
+        <li role="none">
+          <a href="https://wa.me/51968269924" 
+             class="btn-whatsapp" 
+             target="_blank" 
+             rel="noopener noreferrer"
+             role="menuitem"
+             aria-label="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+            <span class="btn-text">WhatsApp</span>
+            <span class="btn-pulse"></span>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Botón menú móvil mejorado -->
+      <button class="mobile-menu-btn" 
+              id="mobileMenuBtn"
+              type="button"
+              aria-controls="navMenu"
+              aria-expanded="false"
+              aria-label="Abrir menú de navegación">
+        <span class="hamburger">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Indicador de progreso de scroll -->
+  <div class="scroll-progress" aria-hidden="true"></div>
+  
+  <!-- Overlay para menú móvil -->
+  <div class="nav-overlay" id="navOverlay" aria-hidden="true"></div>
+</nav>
+
+<!-- Indicadores de navegación lateral (opcional) -->
+<aside class="nav-indicators" aria-label="Indicadores de sección">
+  <div class="indicator" data-target="#inicio" aria-label="Ir a Inicio"></div>
+  <div class="indicator" data-target="#servicios" aria-label="Ir a Servicios"></div>
+  <div class="indicator" data-target="#portafolio" aria-label="Ir a Portafolio"></div>
+  <div class="indicator" data-target="#cursos" aria-label="Ir a Cursos"></div>
+  <div class="indicator" data-target="#blog" aria-label="Ir a Blog"></div>
+  <div class="indicator" data-target="#contacto" aria-label="Ir a Contacto"></div>
+  <div class="indicator" data-target="#logincertificados" aria-label="Ir a Certificados"></a>
+</aside>
+    <div class="login-container">
+        <div class="header">
+            <h1>🎓 ClasesMat.com</h1>
+            <p>Acceso a tu Certificado</p>
+        </div>
+        
+        <div class="form-container">
+            <div class="error" id="error">
+                ❌ Correo electrónico incorrecto
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        placeholder="tu@email.com"
+                        required
+                    >
+                </div>
+                
+                <button type="submit" class="btn-login">
+                    Acceder a mi Certificado
+                </button>
+            </form>
+            
+            <div class="info">
+                💡 Ingresa el correo registrado para ver tu certificado verificado
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>ClasesMat.com</strong> - Certificación Profesional</p>
+        </div>
+    </div>
+    
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+        const errorDiv = document.getElementById('error');
+        
+        // Email autorizado
+        const authorizedEmail = 'jralfaroh@gmail.com';
+        
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const emailValue = emailInput.value.trim().toLowerCase();
+            
+            if (emailValue === authorizedEmail.toLowerCase()) {
+                // Login exitoso - redirigir a la página del certificado
+                window.location.href = 'certificado.html';
+            } else {
+                // Mostrar error
+                errorDiv.style.display = 'block';
+                emailInput.style.borderColor = '#e53e3e';
+                
+                setTimeout(() => {
+                    errorDiv.style.display = 'none';
+                    emailInput.style.borderColor = '#e8f4f8';
+                }, 3000);
+            }
+        });
+        
+        // Limpiar error al escribir
+        emailInput.addEventListener('input', function() {
+            errorDiv.style.display = 'none';
+            emailInput.style.borderColor = '#e8f4f8';
+        });
+    </script>
+</body>
+</html>

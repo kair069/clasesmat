@@ -1,0 +1,978 @@
+/* ESTILOS ESPECÍFICOS PARA CONTACTO Y CURSO - MEJORADO */
+
+/* Variables adicionales para el curso */
+:root {
+  --course-primary: #1e40af;
+  --course-secondary: #0ea5e9;
+  --course-accent: #06b6d4;
+  --course-success: #10b981;
+  --course-electric: #059669;
+  --course-warning: #f59e0b;
+  --course-error: #ef4444;
+  
+  --course-gradient-primary: linear-gradient(135deg, #1e40af 0%, #0ea5e9 50%, #06b6d4 100%);
+  --course-gradient-electric: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+  --course-gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
+  
+  --course-shadow: 0 10px 30px rgba(30, 64, 175, 0.2);
+  --course-shadow-hover: 0 20px 40px rgba(30, 64, 175, 0.3);
+}
+
+/* Hero de contacto mejorado */
+.contact-hero {
+  background: var(--course-gradient-primary);
+  color: white;
+  padding: 120px 0 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><pattern id="coursePattern" width="80" height="80" patternUnits="userSpaceOnUse"><circle cx="40" cy="40" r="2" fill="rgba(255,255,255,0.1)"/><path d="M20,40 L60,40 M40,20 L40,60" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23coursePattern)"/></svg>');
+  animation: float 20s infinite linear;
+}
+
+.location-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 24px;
+  animation: slideInLeft 1s ease-out;
+}
+
+.location-badge i {
+  color: var(--course-electric);
+  font-size: 16px;
+}
+
+.contact-hero h1 {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 16px;
+  animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.contact-hero p {
+  font-size: 1.25rem;
+  margin-bottom: 32px;
+  opacity: 0.9;
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.contact-stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  animation: fadeInUp 1s ease-out 0.9s both;
+}
+
+.stat-item {
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.stat-item:hover {
+  transform: translateY(-5px);
+}
+
+.stat-item i {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  opacity: 0.9;
+  color: var(--course-electric);
+}
+
+.stat-item strong {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.stat-item span {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Sección principal mejorada */
+.contact-main {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Formulario mejorado */
+.contact-form-section {
+  background: white;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: var(--course-shadow);
+  position: relative;
+  overflow: hidden;
+  animation: slideInUp 0.8s ease-out;
+}
+
+.contact-form-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--course-gradient-primary);
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.form-header h2 {
+  color: var(--course-primary);
+  font-size: 1.8rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.form-header p {
+  color: #64748b;
+  font-size: 1rem;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-group {
+  position: relative;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #374151;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px 12px 45px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: #fafafa;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--course-secondary);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+  transform: translateY(-1px);
+}
+
+.form-group input:valid,
+.form-group select:valid,
+.form-group textarea:valid {
+  border-color: var(--course-success);
+}
+
+.form-group input.valid,
+.form-group select.valid,
+.form-group textarea.valid {
+  border-color: var(--course-success) !important;
+  background-color: #f0fdf4 !important;
+}
+
+.form-group input.invalid,
+.form-group select.invalid,
+.form-group textarea.invalid {
+  border-color: var(--course-error) !important;
+  background-color: #fef2f2 !important;
+}
+
+.form-icon {
+  position: absolute;
+  left: 15px;
+  top: 38px;
+  color: #9ca3af;
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.form-group:focus-within .form-icon {
+  color: var(--course-secondary);
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+  padding: 12px;
+  border-radius: 8px;
+  border-left: 4px solid var(--course-secondary);
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  transform: scale(1.2);
+  accent-color: var(--course-secondary);
+}
+
+.checkbox-group label {
+  margin: 0;
+  font-size: 14px;
+  color: var(--course-primary);
+  font-weight: 600;
+}
+
+.submit-btn {
+  background: var(--course-gradient-electric);
+  color: white;
+  border: none;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+}
+
+.submit-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: left 0.5s;
+}
+
+.submit-btn:hover::before {
+  left: 100%;
+}
+
+.submit-btn:hover {
+  background: linear-gradient(135deg, #34d399, #10b981);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 35px rgba(16, 185, 129, 0.4);
+}
+
+.submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-loading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-footer {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.form-footer p {
+  color: #64748b;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.form-footer i {
+  color: var(--course-success);
+}
+
+/* Sección de información mejorada */
+.contact-info-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  animation: slideInRight 0.8s ease-out;
+}
+
+.contact-mascot {
+  text-align: center;
+  position: relative;
+}
+
+.mascot-image {
+  width: 150px;
+  height: auto;
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.1));
+  animation: gentle-float 3s ease-in-out infinite;
+}
+
+.mascot-bubble {
+  background: var(--course-gradient-primary);
+  color: white;
+  padding: 1rem;
+  border-radius: 15px;
+  margin-top: 1rem;
+  position: relative;
+  box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
+}
+
+.mascot-bubble::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid var(--course-secondary);
+}
+
+.mascot-bubble p {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+}
+
+.mascot-bubble p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-methods h3 {
+  color: var(--course-primary);
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+}
+
+.contact-item:hover {
+  transform: translateY(-3px) translateX(5px);
+  box-shadow: var(--course-shadow-hover);
+  border-left-color: var(--course-secondary);
+}
+
+.contact-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: white;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.contact-icon.whatsapp { 
+  background: var(--course-gradient-electric);
+}
+
+.contact-icon.email { 
+  background: var(--course-gradient-primary);
+}
+
+.contact-icon.location { 
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.contact-details {
+  flex: 1;
+}
+
+.contact-details strong {
+  display: block;
+  color: var(--course-primary);
+  margin-bottom: 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.contact-details p {
+  color: #64748b;
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.contact-btn {
+  background: var(--course-gradient-warning);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.contact-btn:hover {
+  background: linear-gradient(135deg, #eab308, #ca8a04);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+}
+
+.trust-badges {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid var(--course-secondary);
+}
+
+.trust-badges h4 {
+  color: var(--course-primary);
+  text-align: center;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.badges-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.badge-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: #475569;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.badge-item:hover {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  transform: scale(1.02);
+}
+
+.badge-item i {
+  color: var(--course-secondary);
+  font-size: 14px;
+}
+
+/* Sección de ubicaciones mejorada */
+.location-section {
+  padding: 80px 0;
+  background: white;
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.location-card {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 15px;
+  border-left: 4px solid var(--course-secondary);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.location-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(14, 165, 233, 0.02) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.location-card.primary {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  border-left-color: var(--course-primary);
+}
+
+.location-card.primary::before {
+  background: linear-gradient(135deg, transparent 0%, rgba(30, 58, 138, 0.05) 100%);
+}
+
+.location-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--course-shadow);
+}
+
+.location-card:hover::before {
+  opacity: 1;
+}
+
+.location-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.location-header i {
+  color: var(--course-secondary);
+  font-size: 1.2rem;
+}
+
+.location-card.primary .location-header i {
+  color: var(--course-primary);
+}
+
+.location-header h3 {
+  color: var(--course-primary);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.location-card p {
+  color: #64748b;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  position: relative;
+  z-index: 1;
+}
+
+.location-features {
+  margin-top: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.feature {
+  display: inline-block;
+  background: var(--course-secondary);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-right: 6px;
+  margin-bottom: 4px;
+}
+
+.location-card.primary .feature {
+  background: var(--course-primary);
+}
+
+.map-container {
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: var(--course-shadow);
+  border: 1px solid #e2e8f0;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+}
+
+/* Mensajes de formulario mejorados */
+.form-message {
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  display: none;
+  font-weight: 500;
+  animation: slideDown 0.3s ease-out;
+}
+
+.form-message.success {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+  color: #065f46;
+  border: 2px solid var(--course-success);
+}
+
+.form-message.error {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  color: #991b1b;
+  border: 2px solid var(--course-error);
+}
+
+.form-message.info {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  color: var(--course-primary);
+  border: 2px solid var(--course-secondary);
+}
+
+/* Contador de caracteres */
+.char-counter {
+  font-size: 12px;
+  color: #64748b;
+  text-align: right;
+  margin-top: 4px;
+  transition: color 0.3s ease;
+}
+
+/* Animaciones mejoradas */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gentle-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+  100% { transform: translateY(0px) rotate(360deg); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.fa-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Estilos específicos para curso */
+.course-form-section {
+  border-top-color: var(--course-electric);
+}
+
+.course-form-section .form-header h2 {
+  color: var(--course-electric);
+}
+
+.course-form-section .checkbox-group {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border-left-color: var(--course-electric);
+}
+
+.course-form-section .checkbox-group label {
+  color: var(--course-electric);
+}
+
+.course-form-section .form-group:focus-within .form-icon {
+  color: var(--course-electric);
+}
+
+.course-form-section .form-group input:focus,
+.course-form-section .form-group select:focus,
+.course-form-section .form-group textarea:focus {
+  border-color: var(--course-electric);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+/* Instructor section específica */
+.instructor-section {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.instructor-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-left: 4px solid var(--course-electric);
+}
+
+.instructor-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.instructor-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--course-electric);
+}
+
+.instructor-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.instructor-info h3 {
+  color: var(--course-primary);
+  margin-bottom: 4px;
+  font-size: 1.3rem;
+}
+
+.instructor-info p {
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.instructor-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #fbbf24;
+}
+
+.instructor-rating span {
+  color: #64748b;
+  font-size: 14px;
+  margin-left: 8px;
+}
+
+.instructor-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.instructor-contact .contact-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 14px;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  margin-bottom: 0;
+}
+
+.instructor-contact .contact-item:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.instructor-contact i {
+  color: var(--course-secondary);
+  width: 16px;
+}
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+  .contact-hero {
+    padding: 100px 0 60px;
+  }
+  
+  .contact-hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .contact-stats {
+    gap: 1.5rem;
+    flex-direction: column;
+  }
+  
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .contact-form-section {
+    padding: 2rem;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  
+  .locations-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .badges-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-item {
+    padding: 1rem;
+  }
+  
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+  
+  .mascot-image {
+    width: 120px;
+  }
+  
+  .instructor-header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .instructor-avatar {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-hero {
+    padding: 90px 0 50px;
+  }
+  
+  .contact-form-section {
+    padding: 1.5rem;
+  }
+  
+  .form-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .submit-btn {
+    padding: 14px 24px;
+    font-size: 14px;
+  }
+  
+  .contact-stats {
+    gap: 1rem;
+  }
+  
+  .map-container iframe {
+    height: 250px;
+  }
+  
+  .trust-badges {
+    padding: 1rem;
+  }
+  
+  .badge-item {
+    padding: 8px;
+    font-size: 11px;
+  }
+  
+  .location-card {
+    padding: 1rem;
+  }
+  
+  .instructor-card {
+    padding: 1.5rem;
+  }
+}

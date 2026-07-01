@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre la No Convergencia de la Meta</title>
+
+<script>
+  window.MathJax = {
+    tex: {
+      inlineMath: [['\\(', '\\)']],
+      displayMath: [['\\[', '\\]']],
+      tags: 'ams'
+    },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js"></script>
+
+<style>
+  :root{
+    --primario:#143c5a;
+    --acento:#008080;
+    --fondoclaro:#f0f7f7;
+    --gris:#3c3c3c;
+    --naranja:#b5651d;
+    --naranja-bg:#fdf3e7;
+    --gris-caja:#f4f4f4;
+    --gris-borde:#8a8a8a;
+    --serif: Georgia, 'Palatino Linotype', 'Book Antiqua', serif;
+    --sans: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+
+  body{
+    margin:0;
+    background:#e9eef0;
+    font-family:var(--serif);
+    color:var(--gris);
+    line-height:1.65;
+  }
+
+  .page{
+    max-width:820px;
+    margin:0 auto;
+    background:#ffffff;
+    padding:56px 64px 90px;
+    box-shadow:0 0 40px rgba(0,0,0,0.08);
+  }
+
+  @media (max-width:700px){
+    .page{ padding:32px 22px 60px; }
+  }
+
+  header.top-header{
+    text-align:center;
+    padding-bottom:18px;
+    border-bottom:2px solid var(--acento);
+    margin-bottom:36px;
+  }
+
+  header.top-header .eyebrow{
+    font-family:var(--sans);
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    color:var(--acento);
+    margin-bottom:10px;
+  }
+
+  h1.title{
+    color:var(--primario);
+    font-size:1.9rem;
+    line-height:1.3;
+    margin:0 0 14px;
+  }
+
+  .authors{
+    font-family:var(--sans);
+    font-size:0.95rem;
+    color:var(--gris);
+  }
+
+  .authors small{
+    display:block;
+    color:#777;
+    margin-top:4px;
+  }
+
+  .date-line{
+    font-family:var(--sans);
+    font-size:0.85rem;
+    color:#777;
+    margin-top:10px;
+  }
+
+  .abstract{
+    background:var(--fondoclaro);
+    border-left:4px solid var(--primario);
+    padding:18px 22px;
+    margin:30px 0;
+    font-size:0.95rem;
+  }
+  .abstract .abstract-title{
+    font-family:var(--sans);
+    font-weight:700;
+    color:var(--primario);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    font-size:0.75rem;
+    margin-bottom:8px;
+  }
+
+  nav.toc{
+    background:#fafafa;
+    border:1px solid #e0e0e0;
+    border-radius:4px;
+    padding:20px 26px;
+    margin:34px 0 44px;
+    font-family:var(--sans);
+    font-size:0.9rem;
+  }
+  nav.toc .toc-title{
+    font-weight:700;
+    color:var(--primario);
+    text-transform:uppercase;
+    letter-spacing:0.1em;
+    font-size:0.75rem;
+    margin-bottom:12px;
+  }
+  nav.toc ol{
+    margin:0;
+    padding-left:1.2em;
+  }
+  nav.toc li{ margin-bottom:6px; }
+  nav.toc a{
+    color:var(--gris);
+    text-decoration:none;
+  }
+  nav.toc a:hover{ color:var(--acento); text-decoration:underline; }
+
+  section.chapter{
+    margin-top:48px;
+  }
+
+  h2{
+    color:var(--primario);
+    font-size:1.4rem;
+    border-bottom:1.5px solid var(--acento);
+    padding-bottom:8px;
+    margin-top:0;
+  }
+
+  h3{
+    color:var(--primario);
+    font-size:1.12rem;
+    margin-top:34px;
+  }
+
+  p{ margin:14px 0; }
+
+  a{ color:var(--acento); }
+
+  /* Cajas de tipo teorema */
+  .box{
+    border:1px solid;
+    border-radius:5px;
+    padding:14px 18px;
+    margin:22px 0;
+    font-size:0.95rem;
+  }
+  .box .box-title{
+    font-family:var(--sans);
+    font-weight:700;
+    margin-bottom:6px;
+  }
+
+  .box.definicion{ background:var(--fondoclaro); border-color:var(--primario); }
+  .box.definicion .box-title{ color:var(--primario); }
+
+  .box.axioma{ background:var(--naranja-bg); border-color:var(--naranja); }
+  .box.axioma .box-title{ color:var(--naranja); }
+
+  .box.proposicion, .box.corolario{ background:#e6f4f4; border-color:var(--acento); }
+  .box.proposicion .box-title, .box.corolario .box-title{ color:var(--acento); }
+
+  .box.observacion{ background:var(--gris-caja); border-color:var(--gris-borde); font-style:normal; }
+  .box.observacion .box-title{ color:#333; font-style:italic; }
+
+  .box.ejemplo{ background:var(--fondoclaro); border-color:#7a9db5; }
+  .box.ejemplo .box-title{ color:var(--primario); }
+
+  .proof{
+    margin:10px 0 22px;
+    padding-left:16px;
+    border-left:3px solid #ccc;
+    font-size:0.93rem;
+    color:#444;
+  }
+  .proof .proof-label{
+    font-family:var(--sans);
+    font-weight:700;
+    font-style:italic;
+    color:#555;
+  }
+  .qed{ float:right; }
+
+  /* Caja "para todo publico" */
+  .explicacion{
+    background:#f0faf9;
+    border:1.5px solid #4a9b8e;
+    border-radius:6px;
+    padding:16px 20px;
+    margin:26px 0;
+    position:relative;
+  }
+  .explicacion .exp-title{
+    font-family:var(--sans);
+    font-weight:700;
+    color:#1f6f63;
+    margin-bottom:8px;
+  }
+  .explicacion .exp-title::before{
+    content:"★ ";
+  }
+
+  /* Cita de artista */
+  .cita{
+    background:#fff;
+    border:1px solid #b9c7d1;
+    border-radius:4px;
+    margin:26px 0 26px 8px;
+    padding:16px 20px 14px;
+    position:relative;
+  }
+  .cita .cita-tag{
+    display:inline-block;
+    background:var(--primario);
+    color:#fff;
+    font-family:var(--sans);
+    font-weight:700;
+    font-size:0.78rem;
+    padding:4px 10px;
+    border-radius:3px;
+    position:relative;
+    top:-28px;
+    left:-4px;
+  }
+  .cita p{
+    font-style:italic;
+    margin:6px 0 0;
+  }
+
+  blockquote{
+    font-style:italic;
+    color:#333;
+  }
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:22px 0;
+    font-size:0.85rem;
+    font-family:var(--sans);
+  }
+  table th{
+    background:var(--primario);
+    color:#fff;
+    text-align:left;
+    padding:8px 10px;
+  }
+  table td{
+    padding:8px 10px;
+    border-bottom:1px solid #e2e2e2;
+    vertical-align:top;
+  }
+  table tr:nth-child(even) td{ background:#f7fafa; }
+
+  .chart-wrap{
+    margin:30px 0;
+    text-align:center;
+  }
+  .chart-wrap svg{ max-width:100%; height:auto; }
+  .chart-caption{
+    font-family:var(--sans);
+    font-size:0.82rem;
+    color:#666;
+    margin-top:8px;
+  }
+
+  ul, ol{ margin:14px 0; padding-left:1.4em; }
+  li{ margin-bottom:6px; }
+
+  .bib{
+    font-size:0.88rem;
+    color:#333;
+  }
+  .bib ol{ padding-left:1.6em; }
+  .bib li{ margin-bottom:10px; }
+
+  footer.page-footer{
+    margin-top:60px;
+    padding-top:18px;
+    border-top:1px solid #ddd;
+    text-align:center;
+    font-family:var(--sans);
+    font-size:0.78rem;
+    color:#999;
+  }
+
+  .backlink{
+    display:inline-block;
+    margin-top:6px;
+    font-size:0.8rem;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="top-header">
+    <div class="eyebrow">Segunda edición, ampliada</div>
+    <h1 class="title">Sobre la No Convergencia de la Meta:<br>
+      Una Formalización Matemática del Proceso Creativo<br>
+      en Artistas Solistas y Colectivos Musicales</h1>
+    <div class="authors">
+      Alex Sandro Cayllahua Chire
+      <small>Basado en una conversación informal entre dos amigos</small>
+    </div>
+    <div class="date-line">Segunda edición, ampliada con más referencias y una sección para todo público</div>
+  </header>
+
+  <div class="abstract">
+    <div class="abstract-title">Resumen</div>
+    <p>Este artículo propone una formalización matemática de una idea recurrente en el discurso de artistas y músicos: que la meta no es un punto de llegada fijo, sino un proceso de renovación continua. Partiendo de afirmaciones informales atribuidas a diversos músicos —así como de una intuición personal expresada coloquialmente por un músico aficionado— construimos un marco basado en sucesiones no acotadas y funciones de satisfacción local. Mostramos que, si bien la sucesión global de metas no converge, cada elemento individual de la sucesión admite un máximo local de satisfacción, lo cual reconcilia la experiencia subjetiva de «logro» con la ausencia de un destino final. Distinguimos además entre la estructura de meta de un artista solista y la de un colectivo (banda), modelando esta última como la intersección de vectores de meta individuales.</p>
+    <p>Esta edición amplía el corpus de referencias artísticas e incluye una sección explicativa sin matemática formal, pensada para lectores no especializados, así como una sección final de limitaciones que discute la brecha entre esta formalización cualitativa y una demostración empírica rigurosa.</p>
+  </div>
+
+  <nav class="toc">
+    <div class="toc-title">Contenido</div>
+    <ol>
+      <li><a href="#s1">Introducción</a></li>
+      <li><a href="#s2">Preliminares</a></li>
+      <li><a href="#s3">Definición formal de meta artística</a></li>
+      <li><a href="#s4">La emoción como máximo local</a></li>
+      <li><a href="#s5">Aplicación: simulación numérica simple</a></li>
+      <li><a href="#s6">Conclusión</a></li>
+      <li><a href="#s7">Limitaciones: de la intuición formalizada a la demostración empírica</a></li>
+      <li><a href="#s8">Recomendaciones: hacia una validación empírica a pequeña escala</a></li>
+      <li><a href="#bib">Referencias</a></li>
+    </ol>
+  </nav>
+
+  <!-- ============================================================ -->
+  <section class="chapter" id="s1">
+    <h2>1. Introducción</h2>
+    <p>En el discurso popular sobre la creación artística es común encontrar la idea de que alcanzar un objetivo no cierra un ciclo, sino que abre uno nuevo. Julia Cameron, en su obra sobre el proceso creativo, sugiere que el éxito no es algo que se pueda perfeccionar y dejar atrás, sino un viaje continuo de crecimiento [1]. Esta misma intuición aparece, de forma menos teórica pero igualmente precisa, en la voz de un músico anónimo consultado para este trabajo, quien resumió su filosofía personal así:</p>
+
+    <div class="cita">
+      <span class="cita-tag">Músico anónimo, comunicación personal (2026)</span>
+      <p>«la meta es la meta, no lo sé, pero hay que llegar; y cuando lleguemos a una meta, habrá más metas»</p>
+    </div>
+
+    <p>El objetivo de este artículo es tomar en serio esta intuición y dotarla de estructura formal, contrastándola con las posturas de otros artistas —tanto solistas como agrupaciones, y de distintas generaciones y géneros musicales— documentadas en fuentes secundarias.</p>
+
+    <div class="explicacion">
+      <div class="exp-title">¿De qué trata este artículo, en una frase?</div>
+      <p>Muchos músicos, desde el jazz hasta el rock estadio, dicen básicamente lo mismo con distintas palabras: <em>nunca se llega del todo</em>, pero <em>cada paso del camino se siente bien</em>. Este artículo traduce esa idea a matemáticas simples: una sucesión que crece sin techo, y una función de «qué tan a gusto estoy ahora» que sí puede tocar un máximo en cada momento.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="chapter" id="s2">
+    <h2>2. Preliminares</h2>
+
+    <h3>2.1 El espacio de metas</h3>
+
+    <div class="box definicion">
+      <div class="box-title">Definición 2.1 — Espacio de metas</div>
+      <p>Sea \(\mathcal{M}\) un conjunto no vacío, que llamaremos <strong>espacio de metas</strong>. Cada elemento \(G \in \mathcal{M}\) representa un estado de logro alcanzable por un agente creativo (artista o banda).</p>
+    </div>
+
+    <div class="box definicion">
+      <div class="box-title">Definición 2.2 — Sucesión de metas</div>
+      <p>Una <strong>sucesión de metas</strong> es una función \(G: \mathbb{N} \to \mathcal{M}\), escrita \(\{G_n\}_{n=1}^{\infty}\), donde \(G_n\) representa la meta alcanzada en la etapa \(n\) de la carrera del agente.</p>
+    </div>
+
+    <div class="box definicion">
+      <div class="box-title">Definición 2.3 — Función de renovación</div>
+      <p>Una <strong>función de renovación</strong> es una aplicación \(f: \mathcal{M} \to \mathcal{M}\) tal que</p>
+      \[ G_{n+1} = f(G_n), \qquad \forall n \in \mathbb{N}. \]
+    </div>
+
+    <h3>2.2 No convergencia</h3>
+
+    <div class="box axioma" id="ax-nofinal">
+      <div class="box-title">Axioma 2.1 — Axioma de no finalización</div>
+      <p>Para todo \(n \in \mathbb{N}\), existe \(G_{n+1} \in \mathcal{M}\) tal que \(G_{n+1} \neq G_n\).</p>
+    </div>
+
+    <p>Este axioma formaliza, en su forma más general, la afirmación coloquial de que «siempre habrá más metas». Nótese que no exige nada sobre la naturaleza de \(\mathcal{M}\) ni de \(f\): es puramente estructural.</p>
+
+    <div class="box proposicion" id="prop-monotonia">
+      <div class="box-title">Proposición 2.1 — No convergencia bajo monotonía</div>
+      <p>Bajo el Axioma 2.1, si \(\mathcal{M} \subset \mathbb{R}\) y \(\{G_n\}\) es monótona creciente, entonces \(\{G_n\}\) no converge a ningún \(L \in \mathbb{R}\) finito, es decir:</p>
+      \[ \nexists\, L \in \mathbb{R} : \lim_{n \to \infty} G_n = L. \]
+    </div>
+
+    <div class="proof">
+      <span class="proof-label">Demostración.</span>
+      Si \(\{G_n\}\) fuera monótona creciente y acotada superiormente, convergería por el teorema de convergencia monótona, contradiciendo el Axioma 2.1, que garantiza que ningún término es máximo. Luego \(\{G_n\}\) debe ser no acotada, y por tanto diverge a \(+\infty\).
+      <span class="qed">&#8718;</span>
+    </div>
+
+    <div class="explicacion">
+      <div class="exp-title">En palabras normales</div>
+      <p>Si cada vez que llegas a una meta aparece otra distinta (y nunca te quedas quieto), entonces no existe un «techo final» donde tu carrera se detenga matemáticamente. Eso no es pesimismo: es solo la consecuencia lógica de estar siempre en movimiento.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="chapter" id="s3">
+    <h2>3. Definición formal de meta artística</h2>
+
+    <h3>3.1 Caso solista</h3>
+
+    <div class="box definicion" id="def-metasolo">
+      <div class="box-title">Definición 3.1 — Meta de un artista solista</div>
+      <p>Sea \(x_n \in \mathbb{R}\) una variable que representa el crecimiento interno (técnico, expresivo, personal) de un artista en la etapa \(n\). Definimos su meta como</p>
+      \[ G_n^{\text{solo}} = f(x_n), \]
+      <p>donde \(f\) depende <em>únicamente</em> de la variable interna \(x_n\).</p>
+    </div>
+
+    <div class="box definicion">
+      <div class="box-title">Definición 3.2 — Reconocimiento como variable dependiente</div>
+      <p>Sea \(R_n\) el reconocimiento externo (fama, aprobación, aplausos) recibido en la etapa \(n\). Postulamos que \(R_n\) es una función derivada de la meta, no al revés:</p>
+      \[ R_n = g(G_n^{\text{solo}}), \qquad \text{con} \qquad \frac{\partial G_n^{\text{solo}}}{\partial R_n} = 0. \]
+    </div>
+
+    <p>Esta condición formaliza declaraciones de varios músicos consagrados, de distintas épocas y géneros, que coinciden en situar el motor de la meta en algo interno más que en el aplauso externo.</p>
+
+    <div class="cita"><span class="cita-tag">Duke Ellington</span>
+      <p>Ellington situaba el valor de un músico en su capacidad de escucha más que en el aplauso recibido [2].</p></div>
+
+    <div class="cita"><span class="cita-tag">John Coltrane</span>
+      <p>Para Coltrane, la búsqueda artística apuntaba a una noción de verdad y de superación personal antes que de éxito comercial [3].</p></div>
+
+    <div class="cita"><span class="cita-tag">Miles Davis</span>
+      <p>Sobre su propia inquietud creativa, Davis fue explícito acerca de su incapacidad para quedarse quieto artísticamente: «I can't stand still. I have to change» [4], una declaración de apenas seis palabras que resume el Axioma 2.1 mejor que cualquier fórmula.</p></div>
+
+    <div class="cita"><span class="cita-tag">Freddie Mercury</span>
+      <p>Mercury describió explícitamente su propia función de renovación como insaciable: nunca se conformó con ser sólo un ídolo de rock, sino que perseguía constantemente una idea más ambiciosa de sí mismo [5].</p></div>
+
+    <div class="cita"><span class="cita-tag">Connor Freff Cochran</span>
+      <p>La máxima, de atribución popular, sostiene que la fama es preferible como consecuencia de la meta y no como la meta misma [6].</p></div>
+
+    <div class="box observacion">
+      <div class="box-title">Observación 3.1 — Fama como subproducto</div>
+      <p>La condición \(\partial G_n^{\text{solo}} / \partial R_n = 0\) no implica \(R_n = 0\); implica solamente que \(R_n\) no es un insumo de la función de renovación \(f\). La fama puede ser alta, pero no es <em>causa</em> de la meta.</p>
+    </div>
+
+    <h3>3.2 Caso colectivo (banda)</h3>
+
+    <div class="box definicion">
+      <div class="box-title">Definición 3.3 — Vector de meta individual</div>
+      <p>Sea una banda compuesta por \(k\) integrantes. Cada integrante \(i \in \{1, \dots, k\}\) posee, en la etapa \(n\), un vector de meta \(\vec{v}_i^{(n)} \in \mathbb{R}^d\).</p>
+    </div>
+
+    <div class="box definicion" id="def-grupal">
+      <div class="box-title">Definición 3.4 — Meta grupal</div>
+      <p>La meta de la banda en la etapa \(n\) se define como la intersección de los vectores de meta individuales:</p>
+      \[ \vec{G}_n^{\text{banda}} = \bigcap_{i=1}^{k} \vec{v}_i^{(n)}. \]
+    </div>
+
+    <div class="box proposicion" id="prop-persistencia">
+      <div class="box-title">Proposición 3.1 — Condición de persistencia</div>
+      <p>La banda persiste como colectivo en la etapa \(n\) si y solo si</p>
+      \[ \vec{G}_n^{\text{banda}} \neq \varnothing. \]
+      <p>Si \(\vec{G}_n^{\text{banda}} = \varnothing\) para algún \(n\), el colectivo diverge (se disuelve).</p>
+    </div>
+
+    <div class="box observacion">
+      <div class="box-title">Observación 3.2 — Objetivo externo compartido</div>
+      <p>A diferencia del caso solista, la meta grupal suele apuntar a un objetivo externo compartido \(E \notin \{\vec{v}_i^{(n)}\}\), más que a la suma de ambiciones individuales.</p>
+    </div>
+
+    <div class="cita"><span class="cita-tag">U2 (Bono)</span>
+      <p>El vocalista de U2 describió el objetivo del grupo en términos de lograr que la composición «calara hondo» en el oyente, es decir, un vector externo compartido \(E\) centrado en el efecto emocional sobre el público [7].</p></div>
+
+    <div class="cita"><span class="cita-tag">La Pestilencia</span>
+      <p>La banda colombiana ha documentado, a lo largo de décadas de trayectoria, una meta grupal orientada al cambio social, sostenida como objetivo externo compartido incluso por encima de la composición cambiante de sus integrantes [8].</p></div>
+
+    <div class="cita"><span class="cita-tag">Fleetwood Mac (Mick Fleetwood)</span>
+      <p>Fleetwood ha señalado en entrevistas que la supervivencia de la banda dependió de mantener, pese a los conflictos internos entre sus miembros, un compromiso compartido con la música por encima de las diferencias personales [9] — una ilustración directa de la Proposición 3.1: mientras \(\vec{G}_n^{\text{banda}} \neq \varnothing\), el colectivo persiste, incluso con vectores individuales muy distintos entre sí.</p></div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="chapter" id="s4">
+    <h2>4. La emoción como máximo local</h2>
+
+    <p>Aunque \(\{G_n\}\) no converge globalmente (Sección 2), esto no contradice la experiencia subjetiva de «haber llegado» que describen tanto artistas consagrados como aficionados. Para resolver esta aparente paradoja, introducimos una función de satisfacción.</p>
+
+    <div class="box definicion">
+      <div class="box-title">Definición 4.1 — Función de satisfacción</div>
+      <p>Sea \(h: \mathcal{M} \to \mathbb{R}\) una función continua. Definimos la <strong>satisfacción en la etapa</strong> \(n\) como</p>
+      \[ S(n) = \max_{x \to G_n} h(x). \]
+    </div>
+
+    <div class="box corolario" id="cor-maxlocal">
+      <div class="box-title">Corolario 4.1 — Máximo local sin límite global</div>
+      <p>Aunque \(\{G_n\}\) sea no acotada y sin límite global, \(S(n)\) puede alcanzar un máximo local finito para cada \(n \in \mathbb{N}\).</p>
+    </div>
+
+    <p>Esta es, en términos formales, la reconciliación entre la afirmación de que «siempre habrá más metas» y la existencia genuina de la emoción de logro descrita coloquialmente como sentir «esa emoción... de que pudiste lo que nadie pudo». La sucesión global diverge; el disfrute, en cambio, es local y perfectamente alcanzable en cada paso.</p>
+
+    <div class="cita"><span class="cita-tag">Miles Davis</span>
+      <p>Sobre el placer específico de no terminar nunca una idea musical, Davis observó: «I like to find a place to leave for someone else to finish it» [10] — el "high" que describía no estaba en cerrar la obra, sino en dejarla deliberadamente abierta.</p></div>
+
+    <div class="explicacion">
+      <div class="exp-title">La idea central, sin fórmulas</div>
+      <p>Piensa en subir una escalera que no tiene último escalón: nunca vas a "terminar de subir" (eso es la no convergencia). Pero cada escalón individual sí tiene un punto en el que, por un momento, sientes que lo dominaste por completo antes de subir al siguiente. Ese momento —el aplauso, el estudio terminado, la gira que salió bien— es real y se puede disfrutar sin necesidad de que exista una cima final.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="chapter" id="s5">
+    <h2>5. Aplicación: simulación numérica simple</h2>
+
+    <p>Como ilustración mínima, consideremos \(\mathcal{M} = \mathbb{R}_{\geq 0}\) y una función de renovación lineal simple:</p>
+    \[ f(x) = x + \frac{1}{n}, \qquad G_1 = 1, \]
+    <p>de modo que cada nueva meta exige un poco más de esfuerzo relativo que la anterior, pero con incrementos decrecientes (modelando rendimientos decrecientes del esfuerzo, un fenómeno bien documentado en la práctica deliberada). Definimos además una satisfacción local sencilla:</p>
+    \[ S(n) = 1 - e^{-G_n/5}. \]
+
+    <div class="chart-wrap">
+      <svg viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg">
+        <!-- ejes -->
+        <line x1="60" y1="20" x2="60" y2="290" stroke="#999" stroke-width="1"/>
+        <line x1="60" y1="290" x2="600" y2="290" stroke="#999" stroke-width="1"/>
+        <text x="30" y="15" font-family="Helvetica, Arial" font-size="11" fill="#666">Valor</text>
+        <text x="580" y="310" font-family="Helvetica, Arial" font-size="11" fill="#666">Etapa n</text>
+
+        <!-- gridlines horizontales -->
+        <g stroke="#eee" stroke-width="1">
+          <line x1="60" y1="230" x2="600" y2="230"/>
+          <line x1="60" y1="170" x2="600" y2="170"/>
+          <line x1="60" y1="110" x2="600" y2="110"/>
+          <line x1="60" y1="50" x2="600" y2="50"/>
+        </g>
+
+        <!-- eje x labels (n=1..10) -->
+        <g font-family="Helvetica, Arial" font-size="10" fill="#777">
+          <text x="60" y="304">1</text>
+          <text x="120" y="304">2</text>
+          <text x="180" y="304">3</text>
+          <text x="240" y="304">4</text>
+          <text x="300" y="304">5</text>
+          <text x="360" y="304">6</text>
+          <text x="420" y="304">7</text>
+          <text x="480" y="304">8</text>
+          <text x="540" y="304">9</text>
+          <text x="595" y="304">10</text>
+        </g>
+
+        <!-- Gn (escala: 0 a 3 mapeado a 290..20) -->
+        <polyline fill="none" stroke="#143c5a" stroke-width="2.2"
+          points="60,270 120,225 180,192.7 240,169.7 300,151.7 360,137 420,124.7 480,114 540,104.6 595,96"/>
+        <g fill="#143c5a">
+          <circle cx="60" cy="270" r="3"/><circle cx="120" cy="225" r="3"/><circle cx="180" cy="192.7" r="3"/>
+          <circle cx="240" cy="169.7" r="3"/><circle cx="300" cy="151.7" r="3"/><circle cx="360" cy="137" r="3"/>
+          <circle cx="420" cy="124.7" r="3"/><circle cx="480" cy="114" r="3"/><circle cx="540" cy="104.6" r="3"/><circle cx="595" cy="96" r="3"/>
+        </g>
+
+        <!-- Sn (escala: 0 a 1 mapeado a 290..20) -->
+        <polyline fill="none" stroke="#008080" stroke-width="2.2" stroke-dasharray="6,4"
+          points="60,241.1 120,220 180,203.7 240,190.5 300,179.6 360,170.3 420,162.3 480,155.3 540,149.1 595,143.6"/>
+        <g fill="#008080">
+          <rect x="57" y="238" width="6" height="6"/><rect x="117" y="217" width="6" height="6"/><rect x="177" y="200.7" width="6" height="6"/>
+          <rect x="237" y="187.5" width="6" height="6"/><rect x="297" y="176.6" width="6" height="6"/><rect x="357" y="167.3" width="6" height="6"/>
+          <rect x="417" y="159.3" width="6" height="6"/><rect x="477" y="152.3" width="6" height="6"/><rect x="537" y="146.1" width="6" height="6"/><rect x="592" y="140.6" width="6" height="6"/>
+        </g>
+
+        <!-- leyenda -->
+        <g font-family="Helvetica, Arial" font-size="11">
+          <line x1="380" y1="35" x2="410" y2="35" stroke="#143c5a" stroke-width="2.2"/>
+          <text x="415" y="39" fill="#333">G_n (meta acumulada)</text>
+          <line x1="380" y1="52" x2="410" y2="52" stroke="#008080" stroke-width="2.2" stroke-dasharray="6,4"/>
+          <text x="415" y="56" fill="#333">S(n) (satisfacción local)</text>
+        </g>
+      </svg>
+      <div class="chart-caption">Figura 1. \(G_n\) crece sin cota mientras \(S(n)\) se aproxima asintóticamente a 1.</div>
+    </div>
+
+    <div class="box observacion">
+      <div class="box-title">Observación 5.1 — Lectura del gráfico</div>
+      <p>Nótese que \(G_n \to \infty\) (la meta crece sin cota, consistente con el Axioma 2.1), mientras que \(S(n) \to 1\) (la satisfacción se acerca asintóticamente a un techo, pero <em>nunca</em> alcanza cero ni se estanca: cada etapa produce una ganancia real, aunque cada vez más pequeña). Este es el núcleo matemático de la intuición de ambos amigos: la meta nunca termina, pero cada paso hacia ella es genuinamente satisfactorio.</p>
+    </div>
+
+    <div class="explicacion">
+      <div class="exp-title">Cómo leer el gráfico sin saber cálculo</div>
+      <p>La línea azul (la meta) sube y sube sin parar: siempre hay más camino. La línea verde punteada (cuán satisfecho te sientes) también sube, pero se va aplanando cerca de un techo — nunca deja de crecer del todo, aunque cada vez un poquito menos. Es la versión matemática de «cada logro se siente bien, pero el hambre de seguir nunca desaparece».</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="chapter" id="s6">
+    <h2>6. Conclusión</h2>
+
+    <p>Hemos mostrado que la intuición coloquial de que «la meta siempre genera otra meta» admite una formalización rigurosa como sucesión monótona no acotada sin límite finito. Esta estructura es compatible con, y de hecho predicha por, declaraciones de artistas y colectivos musicales de trayectorias, géneros y generaciones muy distintas: desde el jazz de Ellington, Coltrane y Davis, hasta el rock de Mercury, U2 y Fleetwood Mac, pasando por el compromiso social sostenido de La Pestilencia. La diferencia entre la meta de un solista y la de una banda reside en la variable de control de la función de renovación: interna e individual en el primer caso, intersección de vectores compartidos en el segundo. En ambos casos, la emoción de logro es real y matemáticamente consistente, siempre que se entienda como un máximo local de una función de satisfacción, y no como el límite de la sucesión global de metas —el cual, formalmente, no existe.</p>
+
+    <div class="explicacion">
+      <div class="exp-title">Para llevarte a casa</div>
+      <p>No hace falta llegar a ninguna parte para poder disfrutar el camino. La matemática solo confirma, con otro lenguaje, lo que ya sabían Ellington, Coltrane, Davis, Mercury y el músico anónimo que inspiró este artículo: la meta cambia, pero el gusto de alcanzarla no.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="chapter" id="s7">
+    <h2>7. Limitaciones: de la intuición formalizada a la demostración empírica</h2>
+
+    <h3>7.1 Formalizar no es demostrar</h3>
+
+    <p>Es importante distinguir dos actividades que este artículo, hasta ahora, ha mezclado sin advertirlo explícitamente. La primera es <strong>formalizar</strong>: traducir una intuición en símbolos y demostrar consecuencias lógicas de ciertos supuestos. La segunda es <strong>demostrar empíricamente</strong>: mostrar, con datos medibles y reproducibles, que esos supuestos se cumplen en el mundo real.</p>
+
+    <div class="explicacion">
+      <div class="exp-title">La diferencia en una frase</div>
+      <p>Que algo se pueda escribir con símbolos matemáticos no significa que sea matemáticamente <em>cierto</em> sobre la realidad; significa solamente que es <em>lógicamente consistente</em> dentro de sus propias reglas.</p>
+    </div>
+
+    <p>Todo lo desarrollado en las Secciones 2–5 pertenece a la primera categoría. El Axioma 2.1 no fue derivado de datos: fue <em>postulado</em> a partir de una intuición coloquial. Esto es legítimo como ejercicio formal —así funciona cualquier sistema axiomático—, pero implica que ninguna de las proposiciones subsiguientes constituye evidencia de que la meta artística realmente se comporte así. Un teorema demuestra que <em>si</em> \(\mathcal{M}\), \(f\) y el Axioma 2.1 se cumplen, <em>entonces</em> \(\{G_n\}\) diverge; no demuestra que \(\mathcal{M}\), \(f\) o el axioma existan tal como se definieron.</p>
+
+    <p>Esta distinción es bien conocida en la filosofía de la ciencia: un modelo formal solo adquiere estatus explicativo cuando genera predicciones <strong>falsables</strong> y estas se contrastan con observaciones [11]. Mientras no se especifique cómo medir \(G_n\), \(S(n)\) o \(\vec{v}_i^{(n)}\) en el mundo real, el modelo es una metáfora rigurosa, no una teoría contrastable.</p>
+
+    <h3>7.2 Factores no capturados: caso solista</h3>
+
+    <p>La Definición 3.1 reduce toda la trayectoria de un artista solista a una única variable interna \(x_n\). Esto es una simplificación drástica. La psicología de la creatividad ha identificado múltiples factores, medibles de forma independiente, que influyen en la persistencia y dirección de las metas creativas:</p>
+
+    <ul>
+      <li><strong>Motivación intrínseca vs. extrínseca.</strong> La Teoría de la Autodeterminación distingue empíricamente entre metas perseguidas por interés genuino y metas perseguidas por presión externa o recompensa, y muestra que ambas producen trayectorias de persistencia distintas [12].</li>
+      <li><strong>Componentes de la creatividad.</strong> El modelo componencial de Amabile separa la creatividad en habilidad de dominio, procesos creativos y motivación intrínseca hacia la tarea, cada uno medible por separado mediante instrumentos como el KEYS [13].</li>
+      <li><strong>Estado de flujo.</strong> Csikszentmihalyi documentó, mediante el método de muestreo de experiencia (encuestas repetidas en tiempo real), que la satisfacción creativa depende del balance entre habilidad percibida y dificultad del reto, no solo del logro alcanzado [14].</li>
+      <li><strong>Ciclo de vida artístico y edad.</strong> Estudios sobre creatividad y edad muestran patrones distintos según el dominio (algunos artistas producen su obra más innovadora joven, otros de forma tardía), lo cual contradice un modelo de \(x_n\) estrictamente monótono creciente [15].</li>
+      <li><strong>Contexto socioeconómico y acceso a mercado.</strong> La capacidad de sostener una carrera artística depende de variables externas medibles (ingresos, acceso a distribución, capital social), no solo de crecimiento interno.</li>
+    </ul>
+
+    <div class="box observacion">
+      <div class="box-title">Observación 7.1 — Lo que falta en \(x_n\)</div>
+      <p>Ninguna de estas variables aparece en la Definición 3.1. El modelo trata \(x_n\) como una caja negra unidimensional; la evidencia empírica sugiere que es, como mínimo, un vector multidimensional con componentes parcialmente independientes entre sí.</p>
+    </div>
+
+    <h3>7.3 Factores no capturados: caso de banda</h3>
+
+    <p>La Definición 3.4 es, si cabe, más frágil. Modelar la persistencia de una banda como \(\vec{G}_n^{\text{banda}} = \bigcap_i \vec{v}_i^{(n)} \neq \varnothing\) exige que los vectores de meta individuales coincidan <em>exactamente</em> en algún punto del espacio \(\mathbb{R}^d\).</p>
+
+    <div class="box proposicion" id="prop-fragilidad">
+      <div class="box-title">Proposición 7.1 — Fragilidad genérica de la intersección exacta</div>
+      <p>Si los vectores \(\vec{v}_i^{(n)} \in \mathbb{R}^d\) (\(d \geq 2\)) se modelan como variables continuas que varían de forma independiente entre integrantes, entonces el conjunto de configuraciones para las cuales \(\bigcap_{i=1}^{k} \vec{v}_i^{(n)} \neq \varnothing\) tiene medida de Lebesgue nula en el espacio de parámetros, para \(k \geq 2\).</p>
+    </div>
+
+    <div class="proof">
+      <span class="proof-label">Idea de la demostración.</span>
+      La intersección exacta de \(k\) puntos independientes en un espacio continuo de dimensión \(d \geq 2\) equivale a imponer \((k-1)\cdot d\) ecuaciones de igualdad simultáneas sobre variables continuas. El conjunto solución de un sistema de ecuaciones de igualdad en un espacio continuo es, genéricamente, una variedad de codimensión positiva, y por tanto de medida nula respecto al espacio ambiente.
+      <span class="qed">&#8718;</span>
+    </div>
+
+    <div class="explicacion">
+      <div class="exp-title">En palabras normales</div>
+      <p>Pedir que las metas de todos los integrantes de una banda coincidan <em>exactamente</em> es, en el sentido más literal del término, como pedir que dos dardos lanzados al azar caigan en el mismo punto matemático de un tablero infinito: la probabilidad es cero. Y sin embargo las bandas sí persisten, todo el tiempo, durante años. Esto no es una contradicción de la realidad: es una señal de que el <em>modelo</em> está mal especificado, no de que las bandas sean estadísticamente imposibles.</p>
+    </div>
+
+    <p>Esta fragilidad matemática es justamente el punto que motiva esta sección: si el modelo, tomado en serio, predice que las bandas casi nunca deberían sobrevivir, mientras que empíricamente sí lo hacen, entonces la persistencia de una banda depende de factores que el modelo actual omite por completo:</p>
+
+    <ul>
+      <li><strong>Dinámica de poder y roles.</strong> La investigación sobre equipos de trabajo muestra que el desempeño y la longevidad de un grupo dependen más de la claridad de roles y de la gestión de la interdependencia que de la alineación de objetivos individuales [16].</li>
+      <li><strong>Cohesión y conflicto interpersonal.</strong> Estudios de dinámica de grupos musicales (por ejemplo, en orquestas sinfónicas autogestionadas) documentan que el conflicto crónico no resuelto, más que la divergencia de metas, predice la disolución [17].</li>
+      <li><strong>Incentivos económicos y contractuales.</strong> Contratos discográficos, deudas compartidas y dependencia financiera mutua actúan como fuerzas de cohesión medibles independientemente de si \(\vec{v}_i^{(n)}\) coinciden.</li>
+      <li><strong>Identidad pública compartida.</strong> La marca colectiva construida ante el público puede sostener a una banda incluso cuando las metas individuales han divergido notablemente, algo documentado en estudios de caso de reformaciones y separaciones de bandas populares.</li>
+    </ul>
+
+    <div class="box observacion">
+      <div class="box-title">Observación 7.2 — Reformulación honesta de la Proposición 3.1</div>
+      <p>Una versión más defendible de la condición de persistencia sustituiría la intersección exacta por una <strong>tolerancia</strong> \(\varepsilon > 0\):</p>
+      \[ \vec{G}_n^{\text{banda}} \text{ persiste} \iff \exists\, \vec{c} \in \mathbb{R}^d : \|\vec{v}_i^{(n)} - \vec{c}\| < \varepsilon \ \ \forall i, \]
+      <p>donde \(\varepsilon\) representaría el margen de tolerancia al desacuerdo que el grupo puede sostener antes de fracturarse. Pero incluso esta versión mejorada sigue siendo una <em>definición</em>, no una medición: \(\varepsilon\) tendría que estimarse empíricamente, no asumirse.</p>
+    </div>
+
+    <h3>7.4 Qué haría falta para que esto fuera ciencia y no solo metáfora</h3>
+
+    <p>Para pasar de formalización a demostración, cada variable del modelo tendría que <strong>operacionalizarse</strong>: especificar un procedimiento concreto de medición, aplicable de forma repetible.</p>
+
+    <table>
+      <thead>
+        <tr><th>Variable del modelo</th><th>Operacionalización posible</th><th>Predicción falsable</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>\(x_n\) (crecimiento interno)</td>
+          <td>Escalas psicométricas de motivación intrínseca (p. ej. IMI) aplicadas longitudinalmente [12]</td>
+          <td>Si \(x_n\) es monótona, la puntuación de motivación intrínseca no debería caer entre etapas consecutivas de la carrera</td>
+        </tr>
+        <tr>
+          <td>\(S(n)\) (satisfacción)</td>
+          <td>Muestreo de experiencia (encuestas en tiempo real tras cada logro) [14]</td>
+          <td>La satisfacción reportada debería correlacionar con el reto percibido, no solo con el logro en sí</td>
+        </tr>
+        <tr>
+          <td>\(\vec{v}_i^{(n)}\) (meta individual)</td>
+          <td>Cuestionarios de objetivos de carrera aplicados a cada integrante por separado</td>
+          <td>Bandas con mayor varianza medida entre \(\vec{v}_i^{(n)}\) deberían mostrar mayor tasa de disolución</td>
+        </tr>
+        <tr>
+          <td>\(\vec{G}_n^{\text{banda}}\) (persistencia)</td>
+          <td>Historial documentado de duración de la banda vs. encuestas de cohesión [16]</td>
+          <td>La cohesión medida debería predecir mejor la persistencia que la coincidencia de metas individuales</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="box observacion">
+      <div class="box-title">Observación 7.3 — Conclusión de esta sección</div>
+      <p>Ninguna de estas mediciones se realizó en este trabajo. Las citas de artistas presentadas en las Secciones 3–4 son <em>testimonios cualitativos</em>, no datos cuantitativos: reflejan cómo los artistas <em>describen</em> su experiencia, no una medición independiente de sus variables internas. Confundir una intuición bien articulada —incluso una compartida por múltiples artistas de trayectorias distintas— con una demostración cuantitativa es un salto que este artículo, en su forma actual, no está en condiciones de dar. Lo que sí ofrece es una hipótesis formalizada, clara y potencialmente contrastable: un punto de partida legítimo para una investigación empírica, no su conclusión.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="chapter" id="s8">
+    <h2>8. Recomendaciones: hacia una validación empírica a pequeña escala</h2>
+
+    <p>La sección anterior mostró qué falta para que este marco deje de ser una metáfora formalizada. Esta sección propone un plan mínimo, realizable por un aficionado sin financiamiento institucional, para dar los primeros pasos reales hacia la contrastación empírica.</p>
+
+    <div class="explicacion">
+      <div class="exp-title">La idea en una frase</div>
+      <p>No hace falta un laboratorio ni una universidad para empezar: hace falta elegir una sola variable, medirla de forma repetida en el tiempo, y ver si el patrón predicho por el modelo realmente aparece en los datos.</p>
+    </div>
+
+    <h3>8.1 Paso 1: elegir un solo caso de estudio, no todos a la vez</h3>
+
+    <div class="box observacion">
+      <div class="box-title">Observación 8.1 — Error común a evitar</div>
+      <p>El artículo original intenta cubrir solistas y bandas, jazz y rock, distintas generaciones. Para una validación real esto es contraproducente: cuantas más fuentes distintas se mezclen, más difícil es aislar qué variable explica qué. La recomendación metodológica estándar en estudios de caso es empezar con <strong>un único sujeto o grupo</strong>, seguido en el tiempo [18].</p>
+    </div>
+
+    <p>El sujeto de estudio podría ser el propio autor, su amigo músico, o una banda local a la que ambos tengan acceso directo —esto resuelve además el problema de que las citas de artistas famosos (Secciones 3–4) son de segunda mano y no verificables directamente.</p>
+
+    <h3>8.2 Paso 2: convertir \(x_n\) y \(S(n)\) en algo medible cada semana</h3>
+
+    <p>En lugar de tratar \(x_n\) como un número abstracto, se recomienda un diario de autorregistro breve y estructurado, aplicado con la misma periodicidad durante varios meses:</p>
+
+    <ul>
+      <li>Una escala corta de motivación intrínseca (2–3 ítems tipo Likert, adaptados del Inventario de Motivación Intrínseca) [19].</li>
+      <li>Un registro de horas efectivas dedicadas a la práctica deliberada, no solo horas tocando por gusto [20].</li>
+      <li>Una medición de satisfacción inmediatamente después de cada hito percibido como logro (concierto, canción terminada, ensayo importante), siguiendo el método de muestreo de experiencia [14].</li>
+    </ul>
+
+    <div class="box observacion">
+      <div class="box-title">Observación 8.2 — Por qué semanal y no retrospectivo</div>
+      <p>Pedirle a alguien que recuerde «qué tan motivado estaba hace seis meses» produce datos poco confiables por sesgo de memoria. El registro debe hacerse en el momento o muy cerca de él para tener valor como dato [14].</p>
+    </div>
+
+    <h3>8.3 Paso 3: definir de antemano qué resultado refutaría el modelo</h3>
+
+    <div class="box proposicion">
+      <div class="box-title">Proposición 8.1 — Criterio de falsabilidad mínima</div>
+      <p>Antes de recolectar datos, el investigador debe declarar explícitamente qué observación consideraría evidencia <em>en contra</em> del modelo. Sin este paso, cualquier resultado puede reinterpretarse a favor de la hipótesis original, lo cual la vuelve no falsable [11].</p>
+    </div>
+
+    <p>Ejemplos concretos de criterios de refutación para este modelo:</p>
+
+    <ul>
+      <li>Si la motivación intrínseca registrada <strong>cae y se mantiene baja</strong> durante varias semanas tras alcanzar una meta (en vez de generar una nueva meta), el Axioma 2.1 quedaría cuestionado para ese sujeto.</li>
+      <li>Si la satisfacción reportada <strong>no</strong> muestra ningún máximo local identificable tras los hitos (por ejemplo, si es plana o decreciente independientemente del logro), el Corolario 4.1 no se sostendría.</li>
+      <li>Si una banda con alta varianza medida entre las metas individuales de sus integrantes <strong>persiste</strong> igual de bien que una con baja varianza, la Proposición 7.1 y su reformulación con tolerancia \(\varepsilon\) perderían poder explicativo.</li>
+    </ul>
+
+    <h3>8.4 Paso 4: para el caso de banda, medir la varianza, no solo la existencia de acuerdo</h3>
+
+    <p>En vez de preguntar de forma binaria si las metas «coinciden o no», se recomienda:</p>
+
+    <ol>
+      <li>Aplicar a cada integrante, por separado y sin que se consulten entre sí, un cuestionario breve sobre sus objetivos de carrera (por ejemplo: «en una escala del 1 al 10, ¿qué tan importante es para ti el reconocimiento comercial vs. la exploración artística?»).</li>
+      <li>Calcular la dispersión (varianza o distancia promedio) entre las respuestas del grupo, como una estimación empírica de \(\varepsilon\) en la reformulación de la Observación 7.2.</li>
+      <li>Repetir la medición cada pocos meses y contrastar los cambios en dispersión con eventos reales del grupo (tensiones, salidas de integrantes, cambios de rumbo musical).</li>
+    </ol>
+
+    <div class="box observacion">
+      <div class="box-title">Observación 8.3 — El dato clave a buscar</div>
+      <p>Si con el tiempo se observa que los grupos que se disuelven muestran, <em>antes</em> de disolverse, un aumento medible en la dispersión de \(\vec{v}_i^{(n)}\), eso sería la primera evidencia real —aunque sea anecdótica y de un solo caso— de que la intuición del modelo tiene algo de cierto más allá de la metáfora.</p>
+    </div>
+
+    <h3>8.5 Paso 5: aceptar las limitaciones de un estudio de caso único</h3>
+
+    <div class="explicacion">
+      <div class="exp-title">Honestidad ante los resultados</div>
+      <p>Aun siguiendo estos cinco pasos, el resultado seguiría siendo un <strong>estudio de caso</strong>, no una prueba general. Serviría para decir «en este sujeto/banda concreta, el patrón predicho apareció (o no)», pero no para afirmar que todos los artistas o bandas se comportan así. Generalizar requeriría replicar el mismo protocolo con múltiples sujetos independientes, algo típico de estudios de series temporales de caso único en psicología aplicada [18].</p>
+    </div>
+
+    <div class="box observacion">
+      <div class="box-title">Observación 8.4 — Cierre de esta sección</div>
+      <p>El objetivo de este plan no es demostrar que el modelo es correcto, sino someterlo por primera vez a una prueba real que pueda salir mal. Esa es, precisamente, la diferencia entre una intuición —por elocuente que sea— y el comienzo de la ciencia.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <section class="chapter bib" id="bib">
+    <h2>Referencias</h2>
+    <ol>
+      <li>Cameron, J. <em>El camino del artista</em>. Referencia recogida en compilaciones de citas sobre creatividad y proceso artístico.</li>
+      <li>Ellington, D. Declaración recogida en compilaciones de frases célebres para músicos.</li>
+      <li>Coltrane, J. Declaración recogida en compilaciones de frases célebres para músicos.</li>
+      <li>Davis, M. Declaración recogida en <em>Miles: The Autobiography</em> (Simon &amp; Schuster, 1989) y en compilaciones de entrevistas de DownBeat y Playboy.</li>
+      <li>Davis, M. Declaración sobre su filosofía de la improvisación, recogida en compilaciones de citas de American Songwriter.</li>
+      <li>Mercury, F. Declaración recogida en compilaciones de entrevistas y citas sobre su carrera con Queen.</li>
+      <li>Cochran, C. F. Frase de atribución popular en compilaciones motivacionales para músicos independientes.</li>
+      <li>Bono (Hewson, P.). Declaración en entrevista con Greg Kot, <em>Chicago Tribune</em>, recogida por U2Valencia.com.</li>
+      <li>La Pestilencia. Entrevista concedida a MariskalRock.com, 2025.</li>
+      <li>Fleetwood, M. Declaraciones recogidas en entrevistas y documentales sobre la historia de Fleetwood Mac.</li>
+      <li>Popper, K. <em>The Logic of Scientific Discovery</em>. Routledge, 1959 (trad. orig. 1934).</li>
+      <li>Deci, E. L., &amp; Ryan, R. M. <em>Self-Determination Theory: Basic Psychological Needs in Motivation, Development, and Wellness</em>. Guilford Press, 2017.</li>
+      <li>Amabile, T. M. <em>Creativity in Context: Update to the Social Psychology of Creativity</em>. Westview Press, 1996.</li>
+      <li>Csikszentmihalyi, M. <em>Flow: The Psychology of Optimal Experience</em>. Harper &amp; Row, 1990.</li>
+      <li>Galenson, D. W. <em>Old Masters and Young Geniuses: The Two Life Cycles of Artistic Creativity</em>. Princeton University Press, 2006.</li>
+      <li>Hackman, J. R. <em>Leading Teams: Setting the Stage for Great Performances</em>. Harvard Business School Press, 2002.</li>
+      <li>Allmendinger, J., &amp; Hackman, J. R. <em>Organizations in Changing Environments: The Case of East German Symphony Orchestras</em>. Administrative Science Quarterly, 41(2), 1996.</li>
+      <li>Yin, R. K. <em>Case Study Research and Applications: Design and Methods</em>. SAGE Publications, 2018.</li>
+      <li>McAuley, E., Duncan, T., &amp; Tammen, V. V. <em>Psychometric Properties of the Intrinsic Motivation Inventory in a Competitive Sport Setting</em>. Research Quarterly for Exercise and Sport, 60(1), 1989.</li>
+      <li>Ericsson, K. A., Krampe, R. T., &amp; Tesch-Römer, C. <em>The Role of Deliberate Practice in the Acquisition of Expert Performance</em>. Psychological Review, 100(3), 1993.</li>
+    </ol>
+  </section>
+
+  <footer class="page-footer">
+    Sobre la No Convergencia de la Meta — Segunda edición, ampliada
+    <br><a class="backlink" href="#top">Volver arriba ↑</a>
+  </footer>
+
+</div>
+</body>
+</html>
